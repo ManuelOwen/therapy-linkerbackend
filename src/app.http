@@ -1,0 +1,40 @@
+
+GET http://localhost:8000/
+
+//users
+###
+GET http://localhost:8000/api/doctor/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJLaWJldCIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTcyMDcwMTc5OX0.fhRe2TFvaU-bFr8zpecY5TLTVE1PcPpxdcW3Nj8V5bQ
+
+###
+
+
+
+POST http://localhost:8000/api/doctor/1
+
+    "name":"hezron mark",
+    "position":"neuro-surgeon",
+    "description":"he deals with high risk surgery",
+    "department_id":"2"
+
+
+
+### 
+
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+    "email": "mart22@gmail.com",
+    "password": "1234"
+
+}
+
+# get all doctors
+
+
+GET http://localhost:8000/api/doctor
+
+
+
+

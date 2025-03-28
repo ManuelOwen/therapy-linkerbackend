@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapy Linker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            padding: 40px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .item:hover {
+            transform: translateY(-5px);
+        }
+        .content {
+            width: 50%;
+        }
+        .image {
+            width: 50%;
+            height: 100%;
+            background-image: url('../Api/src/images/cx5.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 1rem;
+            color: #555;
+            text-align: justify;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 1rem;
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="item">
+            <div class="content">
+                <h1>Therapy Linker API</h1>
+                <p>This online counseling management system API enables users to book sessions and consult therapists for mental health services.</p>
+                <hr>
+                <h1>Emmanuel Kibet</h1>
+                <hr>
+                <p><strong>CRUD Functionalities:</strong></p>
+                <p>
+                    <strong>Create:</strong> Book an appointment with a therapist.<br>
+                    <strong>Read:</strong> Retrieve existing records from the database, view available bookings, therapists, and patients.<br>
+                    <strong>Update:</strong> Modify existing records, update user profiles.<br>
+                    <strong>Delete:</strong> Remove outdated reservations or discontinued records.<br>
+                </p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+            <div class="image"></div>
+        </div>
+    </div>
+
+</body>
+</html>
