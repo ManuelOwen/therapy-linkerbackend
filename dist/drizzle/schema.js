@@ -40,6 +40,7 @@ exports.doctorsTable = (0, pg_core_1.pgTable)("doctorTable", {
     position: (0, pg_core_1.varchar)("position", { length: 255 }).notNull(),
     description: (0, pg_core_1.varchar)("description", { length: 255 }).notNull(),
     department_id: (0, pg_core_1.integer)("department_id").notNull().references(() => exports.departmentTable.id, { onDelete: "cascade" }),
+    image_url: (0, pg_core_1.varchar)("image_url", { length: 255 }),
 });
 // 5.Department table
 exports.departmentTable = (0, pg_core_1.pgTable)("department", {

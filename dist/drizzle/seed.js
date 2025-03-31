@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seed = exports.feedback = exports.doctors = exports.department = exports.contact = exports.appointment = exports.users = void 0;
+exports.feedback = exports.doctors = exports.department = exports.contact = exports.appointment = exports.users = void 0;
+exports.seed = seed;
 const db_1 = require("./db");
 const schema_1 = require("./schema");
 // 1. User Table
@@ -101,5 +102,4 @@ async function seed() {
     await db_1.db.insert(schema_1.doctorsTable).values(exports.doctors);
     await db_1.db.insert(schema_1.feedbackTable).values(exports.feedback);
 }
-exports.seed = seed;
 seed().then(() => console.log("Seeding complete")).catch(console.error);

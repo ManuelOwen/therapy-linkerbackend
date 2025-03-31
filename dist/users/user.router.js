@@ -16,4 +16,4 @@ exports.userRouter.put("/users/:id", user_controller_1.updateUser);
 //delete user
 exports.userRouter.delete("/users/:id", user_controller_1.deleteUser);
 // login user
-exports.userRouter.post("/login", user_controller_1.loginUser);
+exports.userRouter.post("/users/login", user_controller_1.loginUser);

@@ -40,6 +40,7 @@ const getUser = async (c) => {
     const id = parseInt(c.req.param("id"));
     if (isNaN(id))
         return c.text("Invalid ID", 400);
+    console.log("ID:", id); // Debugging
     const user = await (0, user_service_1.getUserService)(id);
     if (user == undefined) {
         return c.text("User not found", 404);
@@ -69,6 +70,7 @@ const createUser = async (c) => {
     }
     catch (error) {
         return c.json({ error: error?.message }, 400);
+        console.log(error);
     }
 };
 exports.createUser = createUser;
@@ -76,33 +78,45 @@ exports.createUser = createUser;
 const loginUser = async (c) => {
     try {
         const user = await c.req.json();
+        // Check if user exists
         const userExists = await (0, user_service_1.userLoginService)(user);
-        if (!userExists) {
-            return c.json({ error: "User not found" }, 404);
-        }
-        const userMatch = Array.isArray(userExists) ? await bcrypt_1.default.compare(user.password, userExists[0].password) : true;
-        if (!userMatch) {
-            return c.json({ error: "Invalid Credentials" }, 400);
+        if (userExists === null)
+            return c.json({ message: "User not found" }, 404);
+        // Compare passwords
+        const isPasswordCorrect = await bcrypt_1.default.compare(user.password, userExists?.password);
+        if (!isPasswordCorrect) {
+            return c.json({ error: "Invalid credentials" }, 400); // Invalid password
         }
         else {
+            // Create payload
             const payload = {
-                sub: userExists.full_name,
-                role: userExists.role,
-                exp: Math.floor(Date.now() / 1000) + (60 * 120) // 2 hours expiration
+                user_id: userExists?.id,
+                name: userExists?.full_name,
+                email: userExists?.email,
+                role: userExists?.role,
+                exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 3), // Token expiration (3 days)
             };
-            const secret = process.env.JWT_SECRET; // JWT secret
-            const token = await (0, jwt_1.sign)(payload, secret); // Generate token
-            const loggedInUser = {
-                user_id: userExists.id,
-                role: userExists.role,
-                email: userExists.email,
-                full_name: userExists.full_name
-            };
-            return c.json({ token, user: loggedInUser }, 200);
+            const secret = process.env.JWT_SECRET;
+            if (!secret) {
+                console.error("JWT_SECRET is not defined in environment variables");
+                return c.json({ error: "Internal server error" }, 500);
+            }
+            const token = await (0, jwt_1.sign)(payload, secret);
+            // Return token and user details
+            return c.json({
+                token,
+                user: {
+                    id: userExists?.id,
+                    name: userExists?.full_name,
+                    email: userExists?.email,
+                    role: userExists?.role,
+                },
+            }, 200);
         }
     }
     catch (error) {
-        return c.json({ error: error?.message }, 400);
+        console.error("Login error:", error);
+        return c.json({ error: `Internal Server Error: ${error.message}` }, 500);
     }
 };
 exports.loginUser = loginUser;
@@ -147,6 +161,7 @@ const deleteUser = async (c) => {
     }
     catch (error) {
         return c.json({ error: error?.message }, 400);
+        console.log(error);
     }
 };
 exports.deleteUser = deleteUser;

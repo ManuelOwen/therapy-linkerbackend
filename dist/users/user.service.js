@@ -34,21 +34,18 @@ const deleteUserService = async (id) => {
 exports.deleteUserService = deleteUserService;
 const userLoginService = async (user) => {
     const { email } = user;
-    return await db_1.db.query.userTable.findFirst({
+    const foundUser = await db_1.db.query.userTable.findFirst({
         columns: {
             id: true,
             full_name: true,
+            contact_phone: true,
             email: true,
             password: true,
-            contact_phone: true,
             role: true,
-            createdAt: true,
-            updatedAt: true,
         },
-        where: (0, drizzle_orm_1.sql) `${schema_1.userTable.email} = ${email}`
-        // email: { equals: email } as { equals: string }
+        where: (0, drizzle_orm_1.sql) `${schema_1.userTable.email} = ${email}`,
     });
-    console.log("found user:", user);
-    return user;
+    console.log("Found user:", foundUser); // Debugging
+    return foundUser;
 };
 exports.userLoginService = userLoginService;

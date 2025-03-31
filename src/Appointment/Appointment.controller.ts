@@ -29,7 +29,7 @@ export const listAppointments = async (c: Context) => {
     }
 
  }
- //get Booking by id
+ //get appointment by id
  export const getAppointment = async (c: Context) => {
     const id = parseInt(c.req.param("id"));
     if (isNaN(id)) return c.text("Invalid ID", 400);
@@ -44,6 +44,7 @@ export const listAppointments = async (c: Context) => {
 export const createAppointment = async (c: Context) => {
     try {
         const appointment = await c.req.json();
+       
 
         // Safely parse dates
         if (appointment.appointment_date) {
@@ -53,7 +54,7 @@ export const createAppointment = async (c: Context) => {
             }
             appointment.appointment_date = parsedDate;
         }
-
+        console.log(appointment)
         if (appointment.return_date) {
             const parsedReturnDate = new Date(appointment.return_date);
             if (isNaN(parsedReturnDate.getTime())) {
@@ -67,8 +68,10 @@ export const createAppointment = async (c: Context) => {
         if (!createdAppointment) return c.text("Appointment not created", 404);
         return c.json({ msg: createdAppointment }, 201);
     } catch (error: any) {
+        console.log(error)
         return c.json({ error: error?.message }, 400);
     }
+
 };
 
 
