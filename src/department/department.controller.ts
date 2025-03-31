@@ -51,6 +51,7 @@ export const createDepartment = async (c: Context) => {
         console.log("msg")
 
     } catch (error: any) {
+        console.log(error)
         return c.json({ error: error?.message }, 400)
     }
 }

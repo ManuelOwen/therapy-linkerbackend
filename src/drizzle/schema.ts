@@ -25,14 +25,14 @@ export const userTable = pgTable("user", {
 export const appointmentStatusEnum = pgEnum("appontment_status", ["pending", "approved", "rejected", "cancelled"]);
 export const appointmentTable = pgTable("appointment", {
     id: serial("id").notNull().primaryKey(),
-   // user_id: integer("user_id").notNull().references(() => userTable.id, { onDelete: "cascade" }),
+    //user_id: integer("user_id").notNull().references(() => userTable.id, { onDelete: "cascade" }),
  
     email: varchar("email", { length: 255 }).notNull(),
     doctor: varchar("doctor", { length: 255 }).notNull(),
     department: integer("department").notNull().references(() => departmentTable.id, { onDelete: "cascade" }),
     appointment_date: timestamp("booking_date"),
     return_date: timestamp("return_date"),
-   
+    userId: integer("userId").notNull(), // Add this line
     appointment_status:appointmentStatusEnum("appointment_status").default("pending"),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow()

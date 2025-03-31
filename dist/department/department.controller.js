@@ -48,6 +48,7 @@ const createDepartment = async (c) => {
         console.log("msg");
     }
     catch (error) {
+        console.log(error);
         return c.json({ error: error?.message }, 400);
     }
 };

@@ -28,7 +28,7 @@ const getAppointments = async (c) => {
     }
 };
 exports.getAppointments = getAppointments;
-//get Booking by id
+//get appointment by id
 const getAppointment = async (c) => {
     const id = parseInt(c.req.param("id"));
     if (isNaN(id))
@@ -52,6 +52,7 @@ const createAppointment = async (c) => {
             }
             appointment.appointment_date = parsedDate;
         }
+        console.log(appointment);
         if (appointment.return_date) {
             const parsedReturnDate = new Date(appointment.return_date);
             if (isNaN(parsedReturnDate.getTime())) {
@@ -65,6 +66,7 @@ const createAppointment = async (c) => {
         return c.json({ msg: createdAppointment }, 201);
     }
     catch (error) {
+        console.log(error);
         return c.json({ error: error?.message }, 400);
     }
 };

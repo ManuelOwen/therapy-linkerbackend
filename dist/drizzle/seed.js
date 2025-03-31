@@ -96,7 +96,7 @@ exports.feedback = [
 ];
 async function seed() {
     await db_1.db.insert(schema_1.userTable).values(exports.users);
-    await db_1.db.insert(schema_1.appointmentTable).values(exports.appointment);
+    //await db.insert(appointmentTable).values(appointment);
     await db_1.db.insert(schema_1.contactTable).values(exports.contact);
     await db_1.db.insert(schema_1.departmentTable).values(exports.department);
     await db_1.db.insert(schema_1.doctorsTable).values(exports.doctors);

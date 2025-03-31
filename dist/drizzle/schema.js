@@ -19,10 +19,13 @@ exports.userTable = (0, pg_core_1.pgTable)("user", {
 exports.appointmentStatusEnum = (0, pg_core_1.pgEnum)("appontment_status", ["pending", "approved", "rejected", "cancelled"]);
 exports.appointmentTable = (0, pg_core_1.pgTable)("appointment", {
     id: (0, pg_core_1.serial)("id").notNull().primaryKey(),
-    user_id: (0, pg_core_1.integer)("user_id").notNull().references(() => exports.userTable.id, { onDelete: "cascade" }),
-    appointment_date: (0, pg_core_1.timestamp)("booking_date").notNull(),
-    return_date: (0, pg_core_1.timestamp)("return_date").notNull(),
-    total_amount: (0, pg_core_1.integer)("total_amount").notNull(),
+    //user_id: integer("user_id").notNull().references(() => userTable.id, { onDelete: "cascade" }),
+    email: (0, pg_core_1.varchar)("email", { length: 255 }).notNull(),
+    doctor: (0, pg_core_1.varchar)("doctor", { length: 255 }).notNull(),
+    department: (0, pg_core_1.integer)("department").notNull().references(() => exports.departmentTable.id, { onDelete: "cascade" }),
+    appointment_date: (0, pg_core_1.timestamp)("booking_date"),
+    return_date: (0, pg_core_1.timestamp)("return_date"),
+    userId: (0, pg_core_1.integer)("userId").notNull(), // Add this line
     appointment_status: (0, exports.appointmentStatusEnum)("appointment_status").default("pending"),
     createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow(),
     updatedAt: (0, pg_core_1.timestamp)("updated_at").defaultNow()

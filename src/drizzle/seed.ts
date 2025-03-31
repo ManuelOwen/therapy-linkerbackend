@@ -103,7 +103,7 @@ feedback_message: "Good service"
 
 export async function seed() {
 await db.insert(userTable).values(users);
-await db.insert(appointmentTable).values(appointment);
+//await db.insert(appointmentTable).values(appointment);
 await db.insert(contactTable).values(contact);
 await db.insert(departmentTable).values(department);
 await db.insert(doctorsTable).values(doctors);
